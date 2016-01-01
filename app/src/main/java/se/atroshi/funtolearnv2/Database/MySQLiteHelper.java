@@ -61,7 +61,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                     " ( " +
                     COLUMN_ID               + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMN_CATEGORY_ID      + " INTEGER NOT NULL , " +
-                    COLUMN_CATEGORY_NAME    + " TEXT NOT NULL  " +
+                    COLUMN_CATEGORY_NAME    + " TEXT NOT NULL , " +
+                    COLUMN_IMAGE_PATH       + " TEXT NOT NULL  " +
                     " )";
 
     public Context context;
@@ -78,7 +79,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         //Log.i(TAG, TABLE_CREATE);
         db.execSQL(TABLE_CREATE_ITEMS);
         db.execSQL(TABLE_CREATE_CATEGORIES);
-        Log.i(TAG,"*** Tables has been created ***");
+        Log.i(TAG, "*** Tables has been created ***");
     }
 
     @Override
@@ -95,6 +96,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public void addCategory(Item item){
         if(!categoryExists(item.getCategoryId())) {
 
+            // Save file to internal storage
+            ContextWrapper cw = new ContextWrapper(this.context.getApplicationContext());
+            // path to /data/data/yourapp/app_data/imageDir
+            File directory = cw.getDir(item.getCategoryName(), Context.MODE_PRIVATE);
+            // Create imageDir
+            File mypath = new File(directory, item.getImgName());
+
             // 1. get reference to writable DB
             SQLiteDatabase db = this.getWritableDatabase();
 
@@ -102,6 +110,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put(COLUMN_CATEGORY_ID, item.getCategoryId());
             values.put(COLUMN_CATEGORY_NAME, item.getCategoryName());
+            values.put(COLUMN_IMAGE_PATH, mypath.toString());
 
             // 3. insert
             db.insert(TABLE_CATEGORIES, // table
@@ -160,31 +169,28 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
         // Get items
         Category category = null;
-        if(cursor.moveToFirst()){
-            while (cursor.moveToNext()){
-                // Get data from table row
-                int categoryId = Integer.parseInt(cursor.getString(1));
-                String categoryName = cursor.getString(2);
+        while (cursor.moveToNext()){
+            // Get data from table row
+            int categoryId = Integer.parseInt(cursor.getString(1));
+            String categoryName = cursor.getString(2);
+            String imgPath = cursor.getString(3);
 
-                // Set item
-                category = new Category();
-                category.setCategoryId(categoryId);
-                category.setCategoryName(categoryName);
+            // Set item
+            category = new Category();
+            category.setCategoryId(categoryId);
+            category.setCategoryName(categoryName);
+            category.setImgPath(imgPath);
 
-                categories.add(category);
-            }
+            categories.add(category);
         }
 
         return categories;
     }
 
     public static Category findCategoryById(int id){
-
-
         // Sql query
         String query = "SELECT * FROM " + TABLE_CATEGORIES + " WHERE " + COLUMN_CATEGORY_ID + "=" +id;
         // Perform query
-        //Perform query
         Cursor cursor = db.rawQuery(query,null);
 
         Category category = null;
@@ -192,11 +198,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             // Get data from table row
             int categoryId = Integer.parseInt(cursor.getString(1));
             String categoryName = cursor.getString(2);
+            String imgPath = cursor.getString(3);
 
             // Set item
             category = new Category();
             category.setCategoryId(categoryId);
             category.setCategoryName(categoryName);
+            category.setImgPath(imgPath);
         }
 
         return category;
@@ -227,7 +235,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
         // Get items
         Item item = null;
-        if(cursor.moveToFirst()){
+        //if(cursor.moveToFirst()){
             while (cursor.moveToNext()){
                 // Get data from table row
                 int categoryId = Integer.parseInt(cursor.getString(1));
@@ -245,15 +253,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 item.setItemName(itemName);
                 item.setImgName(imgName);
                 item.setImgPath(imgPath);
-                // Set bitmap
-//                File imageFile = new File(imgPath);
-//                if(imageFile.exists()){
-//                    Bitmap bitmap = BitmapFactory.decodeFile(imgPath);
-//                    item.setBitmap(bitmap);
-//                }
+
                 items.add(item);
             }
-        }
+        //}
         return items;
     }
 

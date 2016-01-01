@@ -38,7 +38,6 @@ public class Task extends AsyncTask<String,String,List<Item>> { // < params, pro
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        //this.controller.updateDisplay();
         // Show loading animation icon
         this.controller.showLoadingAnimation();
         //
@@ -71,16 +70,8 @@ public class Task extends AsyncTask<String,String,List<Item>> { // < params, pro
                 if(!this.db.categoryExists(item.getCategoryId())){
                     this.db.addCategory(item);
                 }
-
             }
         }
-
-        // This part should be rewritten
-
-        //this.controller.setItems(items);
-        //Log.i(tag, content);
-        //return this.controller.getItems();
-
         return null;
     }
 
@@ -93,30 +84,7 @@ public class Task extends AsyncTask<String,String,List<Item>> { // < params, pro
         // Remove the loading animation icon
         this.controller.hideLoadingAnimation();
 
-        //this.controller.getItemsFromDB();
-
-        //this.controller.getCategoriesFromDB();
-
         this.controller.showCategories();
-
-        // GET FROM DB
-//        for(Item item: this.db.getItems(MySQLiteHelper.FIND_ALL,null)){
-//            //Log.i("FROM DB IN TASK", "ID " + item.getItemId());
-//            List<Item> items = this.db.getItems(MySQLiteHelper.FIND_BY_ITEM_ID,item.getItemId());
-//            if(items.size() > 0){
-//                Log.i(TAG, "ID : " + items.get(0).getItemId() + " " + items.get(0).getCategoryName());
-//            }else{
-//                Log.i(TAG,"No item found in db");
-//            }
-//        }
-
-        // Parse data
-        //for (int i = 0; i < this.controller.getItems().size(); i++) {
-            //this.controller.updateDisplay();
-        //}
-
-
-
     }
 
     @Override

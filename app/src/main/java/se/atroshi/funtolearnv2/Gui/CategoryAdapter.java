@@ -3,6 +3,7 @@ package se.atroshi.funtolearnv2.Gui;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import se.atroshi.funtolearnv2.Game.Category;
+import se.atroshi.funtolearnv2.Listener.CategoryListener;
 import se.atroshi.funtolearnv2.R;
 
 
@@ -23,8 +25,9 @@ import se.atroshi.funtolearnv2.R;
  */
 public class CategoryAdapter extends ArrayAdapter<Category> {
 
-    List<Category> categories;
-    Context context;
+    private final String TAG = "CategoryAdapter";
+    private List<Category> categories;
+    private Context context;
     private LruCache<Integer,Bitmap> imageCache;
 
 
@@ -44,6 +47,12 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         // Display Text
         TextView textView = (TextView) view.findViewById(R.id.textView);
         textView.setText(category.getCategoryName());
+
+        ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
+        imageView.setImageBitmap(category.getBitmap());
+
+        imageView.setOnClickListener(new CategoryListener(category));
+
         return view;
     }
 }

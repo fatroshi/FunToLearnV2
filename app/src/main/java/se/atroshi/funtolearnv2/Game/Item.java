@@ -1,7 +1,9 @@
 package se.atroshi.funtolearnv2.Game;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -81,11 +83,21 @@ public class Item {
     }
 
     public Bitmap getBitmap() {
+        getBitmapResource();
         return bitmap;
     }
 
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
+    }
+
+    public void getBitmapResource(){
+        // Set bitmap
+        File imageFile = new File(imgPath);
+        if(imageFile.exists()){
+            Bitmap bitmap = BitmapFactory.decodeFile(imgPath);
+            this.setBitmap(bitmap);
+        }
     }
 
     public Date getDate() {

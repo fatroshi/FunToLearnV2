@@ -31,9 +31,6 @@ public class ItemJSONParser {
 
                     // Parse only if the item does not exist in the database
                     if(!MySQLiteHelper.itemExists(obj.getInt("itemId"))) {
-
-
-
                         item.setCategoryId(obj.getInt("categoryId"));
                         item.setItemId(obj.getInt("itemId"));
                         item.setUploadFolder(obj.getString("uploadFolder"));
@@ -41,7 +38,6 @@ public class ItemJSONParser {
                         item.setImgName(obj.getString("imgName"));
                         item.setItemName(obj.getString("itemName"));
                         item.setDate(obj.getString("published"));
-
                         //Log.i(tag, "http://fun.neodesign.se/" + item.getImgLink());
                         items.add(item);
                     }
