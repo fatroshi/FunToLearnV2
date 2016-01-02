@@ -1,9 +1,7 @@
 package se.atroshi.funtolearnv2;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,12 +13,15 @@ import android.view.MenuItem;
 
 import se.atroshi.funtolearnv2.Controller.Controller;
 import se.atroshi.funtolearnv2.Database.MySQLiteHelper;
+import se.atroshi.funtolearnv2.Fragment.CategoryFragment;
+import se.atroshi.funtolearnv2.Fragment.ItemFragment;
+import se.atroshi.funtolearnv2.Fragment.StartFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    Controller controller;
-    MySQLiteHelper database;
+    private Controller controller;
+    private MySQLiteHelper database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,8 @@ public class MainActivity extends AppCompatActivity
 
         this.controller.requestData("http://fun.neodesign.se/app.json");
 
+        // SET START PAGE
+        this.controller.showStartView();
 
     }
 
@@ -88,15 +91,10 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        item.setTitle("Farhad Atroshi");
-
-
-
         if (id == R.id.language) {
-            // Handle the camera action
+            this.controller.showWordsPlayView();
         } else if (id == R.id.math) {
-
-
+            this.controller.showMathView();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

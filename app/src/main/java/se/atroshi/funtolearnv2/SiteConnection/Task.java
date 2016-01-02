@@ -84,7 +84,6 @@ public class Task extends AsyncTask<String,String,List<Item>> { // < params, pro
         // Remove the loading animation icon
         this.controller.hideLoadingAnimation();
 
-        this.controller.showCategories();
     }
 
     @Override

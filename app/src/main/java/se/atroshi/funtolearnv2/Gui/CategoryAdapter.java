@@ -53,6 +53,8 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
 
         imageView.setOnClickListener(new CategoryListener(category));
 
+        Log.i(TAG,"CategoryListener added");
+
         return view;
     }
 }

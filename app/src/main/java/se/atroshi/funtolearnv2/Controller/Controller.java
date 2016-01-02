@@ -1,5 +1,6 @@
 package se.atroshi.funtolearnv2.Controller;
 
+import android.app.FragmentManager;
 import android.app.ListActivity;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -15,6 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.atroshi.funtolearnv2.Database.MySQLiteHelper;
+import se.atroshi.funtolearnv2.Fragment.CategoryFragment;
+import se.atroshi.funtolearnv2.Fragment.ItemFragment;
+import se.atroshi.funtolearnv2.Fragment.MathFragment;
+import se.atroshi.funtolearnv2.Fragment.StartFragment;
 import se.atroshi.funtolearnv2.Game.Category;
 import se.atroshi.funtolearnv2.Game.Item;
 import se.atroshi.funtolearnv2.Gui.CategoryAdapter;
@@ -41,22 +46,20 @@ public class Controller extends ListActivity{
 
     private MySQLiteHelper database;
 
+    private FragmentManager fragmentManager;
+
     public Controller(MainActivity mainActivity){
         this.mainActivity = mainActivity;
         //DB
         this.database = new MySQLiteHelper(this.mainActivity);
         this.tasks = new ArrayList<>();                                     // Holder for all tasks
 
-        //Textview
-        list = (ListView) this.mainActivity.findViewById(R.id.list);
-        //list.setMovementMethod(new ScrollingMovementMethod());
-
-        // Category listview
-        this.categoryListView = (ListView) this.mainActivity.findViewById(R.id.categoryList);
-
         // Animation for loading
         this.pb = (ProgressBar) this.mainActivity.findViewById(R.id.progressBar);
         this.pb.setVisibility(View.INVISIBLE);
+
+        // Fragment Manager
+        fragmentManager = this.mainActivity.getFragmentManager();
     }
 
 
@@ -69,6 +72,21 @@ public class Controller extends ListActivity{
         }else{
             return  false;
         }
+    }
+
+    public void showStartView(){
+        fragmentManager.beginTransaction().replace(R.id.myContainer, new StartFragment()).commit();
+    }
+
+    public void showWordsPlayView(){
+        //
+        this.fragmentManager.beginTransaction().replace(R.id.myContainer, new CategoryFragment()).commit();
+        //
+        this.showCategories();
+    }
+
+    public void showMathView(){
+        this.fragmentManager.beginTransaction().replace(R.id.myContainer, new MathFragment()).commit();
     }
 
     public void requestData(String uri){
@@ -102,22 +120,36 @@ public class Controller extends ListActivity{
     }
 
     public void showCategories(){
+//        // Category listview
+//        this.categoryListView = (ListView) this.mainActivity.findViewById(R.id.list);
+//
+//        // Adapter
+//        CategoryAdapter adapter = new CategoryAdapter(this.mainActivity,R.layout.items, getCategoriesFromDB());
+//
+//        if(this.categoryListView != null){
+//            this.categoryListView.setAdapter(adapter);
+//
+//        }else {
+//            Log.i(TAG,"categoryListView is NULL");
+//        }
 
-        CategoryAdapter adapter = new CategoryAdapter(this.mainActivity,R.layout.items, getCategoriesFromDB());
-        this.categoryListView.setAdapter(adapter);
     }
 
     public void updateDisplay(){
 
-        //this.list.append(message + "\n");
-        ItemAdapter adapter = new ItemAdapter(this.mainActivity,R.layout.items, this.items);
-        //        setListAdapter(adapter);
-        this.list.setAdapter(adapter);
-        for (Item item: this.items){
-            if(item.getBitmap() != null){
-                Log.i("Controller", "Has bitmap, id " + item.getImgLink());
-            }
-        }
+//        //Textview
+//        list = (ListView) this.mainActivity.findViewById(R.id.list);
+//        //list.setMovementMethod(new ScrollingMovementMethod());
+//
+//        //this.list.append(message + "\n");
+//        ItemAdapter adapter = new ItemAdapter(this.mainActivity,R.layout.items, this.items);
+//        //        setListAdapter(adapter);
+//        this.list.setAdapter(adapter);
+//        for (Item item: this.items){
+//            if(item.getBitmap() != null){
+//                Log.i("Controller", "Has bitmap, id " + item.getImgLink());
+//            }
+//        }
     }
 
     public void addTask(Task task){

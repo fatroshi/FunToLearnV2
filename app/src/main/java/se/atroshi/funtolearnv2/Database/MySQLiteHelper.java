@@ -184,6 +184,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             categories.add(category);
         }
 
+        Log.i(TAG, "Total categories: " + categories.size());
+
         return categories;
     }
 

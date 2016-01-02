@@ -13,23 +13,21 @@
 
 
 
-    <ListView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-
-    <ListView
-        android:id="@+id/categoryList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#302f2f" />
-
 
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/progressBar"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerVertical="true">
+
+    </ProgressBar>
+
+    <FrameLayout
+        android:id="@+id/myContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+
 </RelativeLayout>
