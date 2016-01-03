@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Random;
 
 import se.atroshi.funtolearnv2.Database.MySQLiteHelper;
+import se.atroshi.funtolearnv2.Game.Game;
 import se.atroshi.funtolearnv2.Game.Item;
 import se.atroshi.funtolearnv2.MainActivity;
 import se.atroshi.funtolearnv2.R;
@@ -31,8 +32,8 @@ public class Controller extends ListActivity{
     private Task task;
     private ProgressBar pb;
     private List<Task> tasks;
-    private List<Item> items;
     private MySQLiteHelper database;
+
 
 
     public Controller(MainActivity mainActivity){
@@ -45,6 +46,8 @@ public class Controller extends ListActivity{
         // Animation for loading
         this.pb = (ProgressBar) this.mainActivity.findViewById(R.id.progressBar);
         this.pb.setVisibility(View.INVISIBLE);
+
+
     }
 
     public boolean isOnline(){
@@ -59,17 +62,6 @@ public class Controller extends ListActivity{
 
 
 
-    public static int randInt(int min, int max) {
-
-        // Usually this can be a field rather than a method variable
-        Random rand = new Random();
-
-        // nextInt is normally exclusive of the top value,
-        // so add 1 to make it inclusive
-        int randomNum = rand.nextInt((max - min) + 1) + min;
-
-        return randomNum;
-    }
 
     public void requestData(String uri){
 
@@ -114,19 +106,6 @@ public class Controller extends ListActivity{
 
     public void updateDisplay(){
 
-//        //Textview
-//        list = (ListView) this.mainActivity.findViewById(R.id.list);
-//        //list.setMovementMethod(new ScrollingMovementMethod());
-//
-//        //this.list.append(message + "\n");
-//        ItemAdapter_REMOVE adapter = new ItemAdapter_REMOVE(this.mainActivity,R.layout.items, this.items);
-//        //        setListAdapter(adapter);
-//        this.list.setAdapter(adapter);
-//        for (Item item: this.items){
-//            if(item.getBitmap() != null){
-//                Log.i("Controller", "Has bitmap, id " + item.getImgLink());
-//            }
-//        }
     }
 
     public void addTask(Task task){
@@ -143,10 +122,6 @@ public class Controller extends ListActivity{
      */
     private void showToast(String msg) {
         Toast toast = Toast.makeText(mainActivity, msg, Toast.LENGTH_SHORT);
-    }
-
-    public void setItems(List<Item> items){
-        this.items = items;
     }
 
 }

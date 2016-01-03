@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_speaker) {
-            Navigation.getSpeaker().speak("Hello Sweden 2015");
+            Navigation.getSpeaker().speakOut();
         }
 
         return super.onOptionsItemSelected(item);
