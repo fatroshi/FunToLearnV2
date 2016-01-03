@@ -105,6 +105,8 @@ public class MainActivity extends AppCompatActivity
             this.navigation.showMathView();
         }else if (id == R.id.userinfo) {
             this.navigation.showUserInfoView();
+        }else if (id == R.id.progress) {
+            this.navigation.showProgressView();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

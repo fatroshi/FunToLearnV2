@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import se.atroshi.funtolearnv2.Controller.Controller;
+import se.atroshi.funtolearnv2.Controller.Navigation;
 import se.atroshi.funtolearnv2.Database.MySQLiteHelper;
 import se.atroshi.funtolearnv2.Game.Item;
 import se.atroshi.funtolearnv2.MainActivity;
@@ -87,8 +88,11 @@ public class Task extends AsyncTask<String,String,List<Item>> { // < params, pro
         this.controller.removeTask(this);
         // Remove the loading animation icon
         this.controller.hideLoadingAnimation();
-
+        // Remove text
         this.tvDownloading.setVisibility(View.INVISIBLE);
+        // Send to progress site
+        Navigation.showProgressView();
+
     }
 
     @Override
