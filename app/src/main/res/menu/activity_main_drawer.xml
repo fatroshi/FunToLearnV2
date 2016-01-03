@@ -13,9 +13,9 @@
     <item android:title="Settings">
         <menu>
             <item android:id="@+id/userinfo" android:icon="@drawable/userinfo"
-                android:title="User information" />
+                android:title="User Settings" />
             <item android:id="@+id/progress" android:icon="@drawable/progress"
-                android:title="Progress" />
+                android:title="User Progress" />
         </menu>
     </item>
 </menu>

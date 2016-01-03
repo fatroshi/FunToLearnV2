@@ -90,8 +90,8 @@ public class Task extends AsyncTask<String,String,List<Item>> { // < params, pro
         this.controller.hideLoadingAnimation();
         // Remove text
         this.tvDownloading.setVisibility(View.INVISIBLE);
-        // Send to progress site
-        Navigation.showProgressView();
+        // Send to words page
+        Navigation.showWordsPlayView();
 
     }
 
