@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+
+        // Shutdown the speaker
+        Navigation.getSpeaker().onDestroy();
     }
 
     @Override

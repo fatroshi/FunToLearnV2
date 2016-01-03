@@ -15,9 +15,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/progressBar"
-        android:layout_centerVertical="true">
+        style="@android:style/Widget.Holo.ProgressBar.Large"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginBottom="230dp">
 
     </ProgressBar>
+
+
 
     <FrameLayout
         android:id="@+id/myContainer"
@@ -25,6 +31,17 @@
         android:layout_height="match_parent">
 
     </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Downloading Resources"
+        android:id="@+id/textViewDownloading"
+        android:layout_alignTop="@+id/progressBar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="87dp"
+        android:textColor="#c6fbbc" />
 
 
 </RelativeLayout>
