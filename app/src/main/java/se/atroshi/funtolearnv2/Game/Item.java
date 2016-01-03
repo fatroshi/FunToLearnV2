@@ -83,7 +83,7 @@ public class Item {
     }
 
     public Bitmap getBitmap() {
-        getBitmapResource();
+        //getBitmapResource();
         return bitmap;
     }
 
@@ -91,13 +91,16 @@ public class Item {
         this.bitmap = bitmap;
     }
 
-    public void getBitmapResource(){
+    public Bitmap getBitmapResource(){
         // Set bitmap
         File imageFile = new File(imgPath);
         if(imageFile.exists()){
             Bitmap bitmap = BitmapFactory.decodeFile(imgPath);
             this.setBitmap(bitmap);
+            return this.bitmap;
         }
+
+        return null;
     }
 
     public Date getDate() {

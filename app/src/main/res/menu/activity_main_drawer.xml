@@ -12,7 +12,7 @@
 
     <item android:title="Settings">
         <menu>
-            <item android:id="@+id/name" android:icon="@drawable/userinfo"
+            <item android:id="@+id/userinfo" android:icon="@drawable/userinfo"
                 android:title="User information" />
             <item android:id="@+id/progress" android:icon="@drawable/progress"
                 android:title="Progress" />

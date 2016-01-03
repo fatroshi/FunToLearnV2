@@ -47,13 +47,15 @@ public class Category {
         this.bitmap = bitmap;
     }
 
-    public void getBitmapResourse(){
+    public Bitmap getBitmapResourse(){
         // Set bitmap
         File imageFile = new File(this.imgPath);
         if(imageFile.exists()){
             Bitmap bitmap = BitmapFactory.decodeFile(imgPath);
             this.setBitmap(bitmap);
+            return this.bitmap;
         }
+        return null;
     }
 
     @Override

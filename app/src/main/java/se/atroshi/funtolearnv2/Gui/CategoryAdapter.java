@@ -17,6 +17,7 @@ import java.util.List;
 
 import se.atroshi.funtolearnv2.Game.Category;
 import se.atroshi.funtolearnv2.Listener.CategoryListener;
+import se.atroshi.funtolearnv2.MainActivity;
 import se.atroshi.funtolearnv2.R;
 
 
@@ -49,12 +50,14 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         textView.setText(category.getCategoryName());
 
         ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
-        imageView.setImageBitmap(category.getBitmap());
+        imageView.setImageBitmap(category.getBitmapResourse());
 
         imageView.setOnClickListener(new CategoryListener(category));
+        textView.setOnClickListener(new CategoryListener(category));
 
         Log.i(TAG,"CategoryListener added");
 
         return view;
     }
+
 }

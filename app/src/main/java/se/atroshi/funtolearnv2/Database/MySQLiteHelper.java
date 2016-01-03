@@ -13,6 +13,7 @@ import java.util.List;
 
 import se.atroshi.funtolearnv2.Game.Category;
 import se.atroshi.funtolearnv2.Game.Item;
+import se.atroshi.funtolearnv2.Game.User;
 
 /**
  * Created by Farhad on 31/12/15.
@@ -54,8 +55,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                     COLUMN_PUBLISHED        + " Text NOT NULL "   +
                     " )";
 
-    // TABLE
+    // CATEGORY TABLE
     private static final String TABLE_CATEGORIES          = "categories";
+    // CATEGORY TABLE CREATION QUERY
     private static final String TABLE_CREATE_CATEGORIES   =
             "CREATE TABLE IF NOT EXISTS " + TABLE_CATEGORIES +
                     " ( " +
@@ -65,6 +67,21 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                     COLUMN_IMAGE_PATH       + " TEXT NOT NULL  " +
                     " )";
 
+
+    // CATEGORY TABLE CREATION QUERY
+    private static final String COLUMN_NAME        = "name";
+    private static final String COLUMN_EMAIL       = "email";
+    private static final String DOWNLOAD_UPDATES   = "downloadUpdates";
+    // CATEGORY TABLE
+    private static final String TABLE_USER          = "user";
+    private static final String TABLE_CREATE_USER   =
+            "CREATE TABLE IF NOT EXISTS " + TABLE_USER +
+                    " ( " +
+                    COLUMN_ID       + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_NAME     + " TEXT NOT NULL , " +
+                    COLUMN_EMAIL    + " TEXT NOT NULL , "  +
+                    DOWNLOAD_UPDATES    + " INTEGER NOT NULL  "  +
+                    " )";
     public Context context;
 
     public MySQLiteHelper(Context context) {
@@ -79,6 +96,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         //Log.i(TAG, TABLE_CREATE);
         db.execSQL(TABLE_CREATE_ITEMS);
         db.execSQL(TABLE_CREATE_CATEGORIES);
+        db.execSQL(TABLE_CREATE_USER);
         Log.i(TAG, "*** Tables has been created ***");
     }
 
@@ -87,11 +105,53 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         // Drop older books table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ITEMS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORIES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
 
         // create fresh books table
         this.onCreate(db);
     }
 
+
+    public static void saveUser(User user){
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME, user.getName());
+        values.put(COLUMN_EMAIL, user.getEmail());
+        values.put(DOWNLOAD_UPDATES, user.isDownloadUpdates());
+
+        // 3. insert
+        db.insert(TABLE_USER, // table
+                null, //nullColumnHack
+                values); // key/value -> keys = column names/ values = column values
+    }
+
+    public static User getUser(){
+        String query = "SELECT * FROM " + TABLE_USER + " LIMIT 1";
+        // Perform query
+        Cursor cursor = db.rawQuery(query,null);
+        User user = null;
+        if(cursor.moveToFirst()){
+            // Get data from table row
+            int userId = Integer.parseInt(cursor.getString(0));
+            String name = cursor.getString(1);
+            String email = cursor.getString(2);
+            int update = Integer.parseInt(cursor.getString(3));
+
+            // Set user
+            user.setUserId(userId);
+            user.setName(name);
+            user.setEmail(email);
+
+            // Check update status (In db stored as true = 0, false = 1)
+            boolean isUpdate = false;
+            if(update == 1){
+                isUpdate = true;
+            }
+            user.setDownloadUpdates(isUpdate);
+        }
+
+        return user;
+    }
 
     public void addCategory(Item item){
         if(!categoryExists(item.getCategoryId())) {
@@ -291,21 +351,4 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         }
         return exists;
     }
-
-    /**
-     * Create a function that checks if the item already exist in db, call this method before creating item after parsing JSON
-     * this will also affect downloading images.. which is good.
-     *
-     * This can perhaps handel the app update.
-     *
-     * 1. On app start
-     *  - if we are connected to internet
-     *  - check if we need to download
-     *  - show items if exist from previous downloads
-     *
-     */
-
-//    public static List<Item> getCategories(){
-//        List<Item> items = getItems(FIND_ALL)
-//    }
 }

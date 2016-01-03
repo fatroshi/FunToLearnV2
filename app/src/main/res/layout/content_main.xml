@@ -11,9 +11,6 @@
     tools:context="se.atroshi.funtolearnv2.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-
-
-
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

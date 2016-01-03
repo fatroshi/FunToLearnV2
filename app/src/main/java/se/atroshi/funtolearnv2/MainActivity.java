@@ -1,6 +1,5 @@
 package se.atroshi.funtolearnv2;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,16 +11,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import se.atroshi.funtolearnv2.Controller.Controller;
+import se.atroshi.funtolearnv2.Controller.Navigation;
 import se.atroshi.funtolearnv2.Database.MySQLiteHelper;
-import se.atroshi.funtolearnv2.Fragment.CategoryFragment;
-import se.atroshi.funtolearnv2.Fragment.ItemFragment;
-import se.atroshi.funtolearnv2.Fragment.StartFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Controller controller;
     private MySQLiteHelper database;
+    private Navigation navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +27,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -44,11 +40,21 @@ public class MainActivity extends AppCompatActivity
         this.controller = new Controller(this);
         this.database = new MySQLiteHelper(this);
 
+        // Navigation
+        this.navigation = new Navigation(this, this.controller);
+
         this.controller.requestData("http://fun.neodesign.se/app.json");
 
         // SET START PAGE
-        this.controller.showStartView();
+        this.navigation.showStartView();
 
+
+
+    }
+
+
+    public Controller getController() {
+        return controller;
     }
 
     @Override
@@ -77,10 +83,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        //if (id == R.id.action_settings) {
-            //this.controller.requestData("http://fun.neodesign.se/app.json");
-          //  return true;
-        //}
+        if (id == R.id.action_speaker) {
+            Navigation.getSpeaker().speak("Hello Sweden 2015");
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -92,9 +97,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.language) {
-            this.controller.showWordsPlayView();
+            this.navigation.showWordsPlayView();
         } else if (id == R.id.math) {
-            this.controller.showMathView();
+            this.navigation.showMathView();
+        }else if (id == R.id.userinfo) {
+            this.navigation.showUserInfoView();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
