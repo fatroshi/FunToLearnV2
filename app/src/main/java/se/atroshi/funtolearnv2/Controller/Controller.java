@@ -6,17 +6,15 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import se.atroshi.funtolearnv2.Database.MySQLiteHelper;
-import se.atroshi.funtolearnv2.Game.Game;
-import se.atroshi.funtolearnv2.Game.Item;
+import se.atroshi.funtolearnv2.Database.Database;
+import se.atroshi.funtolearnv2.Game.User;
 import se.atroshi.funtolearnv2.MainActivity;
 import se.atroshi.funtolearnv2.R;
 import se.atroshi.funtolearnv2.SiteConnection.Task;
@@ -27,22 +25,21 @@ import se.atroshi.funtolearnv2.SiteConnection.Task;
 public class Controller extends ListActivity{
 
     private final String TAG = "Controller";
+
     private MainActivity mainActivity;
 
     private Task task;
     private ProgressBar pb;
     private List<Task> tasks;
-    private MySQLiteHelper database;
+    private Database database;
 
 
 
     public Controller(MainActivity mainActivity){
         this.mainActivity = mainActivity;
-
         //DB
-        this.database = new MySQLiteHelper(this.mainActivity);
+        this.database = new Database(this.mainActivity);
         this.tasks = new ArrayList<>();                                     // Holder for all tasks
-
         // Animation for loading
         this.pb = (ProgressBar) this.mainActivity.findViewById(R.id.progressBar);
         this.pb.setVisibility(View.INVISIBLE);
@@ -62,15 +59,28 @@ public class Controller extends ListActivity{
 
 
 
+    public boolean update(){
+        User user = Database.getUser();
+        return user.isDownloadUpdates();
+    }
 
-    public void requestData(String uri){
 
-     if(this.isOnline()){
-            this.task = new Task(this, this.mainActivity);
-            this.task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, uri);
+    public void requestData(){
+        String uri = "http://fun.neodesign.se/app.json";
+        // Check if the user wants to update
+        if(update()) {
+            if (this.isOnline()) {
+                this.task = new Task(this, this.mainActivity);
+                this.task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, uri);
+            } else {
+                // USE TOAST
+                this.showToast("No Internet Connection");
+                TextView tvDownloading = (TextView) this.mainActivity.findViewById(R.id.textViewDownloading);
+                tvDownloading.setVisibility(View.GONE);
+            }
         }else{
-            // USE TOAST
-            this.updateDisplay();
+            TextView tvDownloading = (TextView) this.mainActivity.findViewById(R.id.textViewDownloading);
+            tvDownloading.setVisibility(View.GONE);
         }
     }
 

@@ -4,14 +4,13 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import se.atroshi.funtolearnv2.Controller.Controller;
 import se.atroshi.funtolearnv2.Controller.Navigation;
-import se.atroshi.funtolearnv2.Database.MySQLiteHelper;
+import se.atroshi.funtolearnv2.Database.Database;
 import se.atroshi.funtolearnv2.Game.Item;
 import se.atroshi.funtolearnv2.MainActivity;
 import se.atroshi.funtolearnv2.R;
@@ -27,13 +26,13 @@ public class Task extends AsyncTask<String,String,List<Item>> { // < params, pro
     private Controller controller;
     private MainActivity mainActivity;
     private TextView tvDownloading;
-    private MySQLiteHelper db;
+    private Database db;
 
     public Task(Controller controller, MainActivity mainActivity){
         this.controller = controller;
         this.mainActivity = mainActivity;
         // DB
-        db = new MySQLiteHelper(this.mainActivity);
+        db = new Database(this.mainActivity);
         //
         this.tvDownloading = (TextView) this.mainActivity.findViewById(R.id.textViewDownloading);
     }

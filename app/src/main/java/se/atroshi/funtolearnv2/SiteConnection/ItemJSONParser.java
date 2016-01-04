@@ -6,7 +6,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.atroshi.funtolearnv2.Database.MySQLiteHelper;
+import se.atroshi.funtolearnv2.Database.Database;
 import se.atroshi.funtolearnv2.Game.Item;
 
 /**
@@ -30,7 +30,7 @@ public class ItemJSONParser {
                     Item item = new Item();
 
                     // Parse only if the item does not exist in the database
-                    if(!MySQLiteHelper.itemExists(obj.getInt("itemId"))) {
+                    if(!Database.itemExists(obj.getInt("itemId"))) {
                         item.setCategoryId(obj.getInt("categoryId"));
                         item.setItemId(obj.getInt("itemId"));
                         item.setUploadFolder(obj.getString("uploadFolder"));

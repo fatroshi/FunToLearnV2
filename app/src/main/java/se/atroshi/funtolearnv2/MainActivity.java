@@ -12,13 +12,12 @@ import android.view.MenuItem;
 
 import se.atroshi.funtolearnv2.Controller.Controller;
 import se.atroshi.funtolearnv2.Controller.Navigation;
-import se.atroshi.funtolearnv2.Database.MySQLiteHelper;
+import se.atroshi.funtolearnv2.Database.Database;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Controller controller;
-    private MySQLiteHelper database;
     private Navigation navigation;
 
     @Override
@@ -37,21 +36,15 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Create Controller object
         this.controller = new Controller(this);
-        this.database = new MySQLiteHelper(this);
-
-        // Navigation
+        // Get data from website if needed
+        this.controller.requestData();
+        // Create Navigation object
         this.navigation = new Navigation(this, this.controller);
-
-        this.controller.requestData("http://fun.neodesign.se/app.json");
-
         // SET START PAGE
         this.navigation.showStartView();
-
-
-
     }
-
 
     public Controller getController() {
         return controller;
