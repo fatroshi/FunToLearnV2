@@ -27,13 +27,10 @@ public class Controller extends ListActivity{
     private final String TAG = "Controller";
 
     private MainActivity mainActivity;
-
     private Task task;
     private ProgressBar pb;
     private List<Task> tasks;
     private Database database;
-
-
 
     public Controller(MainActivity mainActivity){
         this.mainActivity = mainActivity;
