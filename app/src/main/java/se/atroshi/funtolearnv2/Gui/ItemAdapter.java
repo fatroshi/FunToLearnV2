@@ -18,6 +18,7 @@ import se.atroshi.funtolearnv2.R;
 
 /**
  * Created by Farhad on 01/01/16.
+ * Adapter for displaying the items
  */
 public class ItemAdapter extends ArrayAdapter<Item> {
 
@@ -37,11 +38,8 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //return super.getView(position, convertView, parent);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.fragment_items, parent, false);
-
-
 
         // If its odd
         this.counter = position;
@@ -61,8 +59,6 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
                 ItemListener firstListener = new ItemListener(firstItem);
                 firstImage.setOnClickListener(firstListener);
-
-
                 // Second
                 secondItem = items.get(this.counter + 1);
                 ImageView secondImage = (ImageView) view.findViewById(R.id.secondImage);
@@ -72,18 +68,8 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
                 ItemListener secondListener = new ItemListener(secondItem);
                 secondImage.setOnClickListener(secondListener);
-
-                //Log.i(TAG, "Both img info " + firsItem.getItemName() + " " + secondItem.getItemName());
             }
         }
-
-        // Display Text
-        //TextView textView = (TextView) view.findViewById(R.id.textView);
-        //textView.setText(item.getCategoryName());
-
-
-
-        //imageView.setOnClickListener(new CategoryListener(item));
 
         return view;
     }

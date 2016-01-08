@@ -11,6 +11,7 @@ import java.net.URL;
 
 /**
  * Created by Farhad on 25/12/15.
+ * This class is used for connecting to the server and reading the content
  */
 public class HttpManager {
 

@@ -17,11 +17,17 @@ import se.atroshi.funtolearnv2.MainActivity;
 
 /**
  * Created by Farhad on 31/12/15.
+ * This class is used for download the images and storing to the internal storage
  */
 public class ImageDownloader {
 
     static final String TAG = "ImageDownloader";
 
+    /**
+     * Download the image
+     * @param imgUrl path to the image
+     * @return Bitmap object
+     */
     static Bitmap download(String imgUrl) {
         InputStream in = null;
         try {
@@ -44,8 +50,12 @@ public class ImageDownloader {
         return null;
     }
 
-
-
+    /**
+     * Stores the image to the internal storage
+     * @param mainActivity main thread
+     * @param item object that contains image information.
+     * @return
+     */
     public static String saveToInternalSorage(MainActivity mainActivity, Item item){
         ContextWrapper cw = new ContextWrapper(mainActivity.getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir

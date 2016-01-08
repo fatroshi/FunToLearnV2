@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import se.atroshi.funtolearnv2.Controller.Controller;
-import se.atroshi.funtolearnv2.Controller.Navigation;
+import se.atroshi.funtolearnv2.Controllers.Controller;
+import se.atroshi.funtolearnv2.Controllers.Navigation;
 import se.atroshi.funtolearnv2.Database.Database;
 import se.atroshi.funtolearnv2.Game.Item;
 import se.atroshi.funtolearnv2.MainActivity;
@@ -18,6 +18,8 @@ import se.atroshi.funtolearnv2.R;
 
 /**
  * Created by Farhad on 25/12/15.
+ * This class is used for downloading content from the website, storing the item info in
+ * the database and storing images to the internal storage.
  */
 public class Task extends AsyncTask<String,String,List<Item>> { // < params, process, result>
 
@@ -50,6 +52,11 @@ public class Task extends AsyncTask<String,String,List<Item>> { // < params, pro
 
     }
 
+    /**
+     * Download resources if needed and save item/category info in the database.
+     * @param params
+     * @return
+     */
     @Override
     protected List<Item> doInBackground(String... params) {
         String content = HttpManager.getDate(params[0]);
@@ -79,6 +86,10 @@ public class Task extends AsyncTask<String,String,List<Item>> { // < params, pro
         return null;
     }
 
+    /**
+     * When task is done redirect user to the category fragment/page
+     * @param result null
+     */
     @Override
     protected void onPostExecute(List<Item> result) {
         super.onPostExecute(result);
@@ -97,6 +108,6 @@ public class Task extends AsyncTask<String,String,List<Item>> { // < params, pro
     @Override
     protected void onProgressUpdate(String... values) {
         //super.onProgressUpdate(values);
-        this.controller.updateDisplay();
+        //this.controller.updateDisplay();
     }
 }

@@ -23,6 +23,7 @@ import se.atroshi.funtolearnv2.R;
 
 /**
  * Created by Farhad on 01/01/16.
+ * Adapter for category listView
  */
 public class CategoryAdapter extends ArrayAdapter<Category> {
 

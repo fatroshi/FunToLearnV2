@@ -10,9 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import se.atroshi.funtolearnv2.Controller.Controller;
-import se.atroshi.funtolearnv2.Controller.Navigation;
-import se.atroshi.funtolearnv2.Database.Database;
+import se.atroshi.funtolearnv2.Controllers.Controller;
+import se.atroshi.funtolearnv2.Controllers.Navigation;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity
         // Get data from website if needed
         this.controller.requestData();
         // Create Navigation object
-        this.navigation = new Navigation(this, this.controller);
+        this.navigation = new Navigation(this);
         // SET START PAGE
         this.navigation.showStartView();
     }
