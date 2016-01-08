@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import se.atroshi.funtolearnv2.Controllers.Controller;
 import se.atroshi.funtolearnv2.Controllers.Navigation;
+import se.atroshi.funtolearnv2.Database.Database;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

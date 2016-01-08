@@ -56,7 +56,7 @@ public class ImageDownloader {
      * @param item object that contains image information.
      * @return
      */
-    public static String saveToInternalSorage(MainActivity mainActivity, Item item){
+    public static String saveToInternalStorage(MainActivity mainActivity, Item item){
         ContextWrapper cw = new ContextWrapper(mainActivity.getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir
         File directory = cw.getDir(item.getCategoryName(), Context.MODE_PRIVATE);

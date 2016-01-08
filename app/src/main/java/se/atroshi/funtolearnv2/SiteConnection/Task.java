@@ -74,7 +74,7 @@ public class Task extends AsyncTask<String,String,List<Item>> { // < params, pro
                 item.setBitmap(bitmap);
 
                 // Save file to internal storage
-                ImageDownloader.saveToInternalSorage(this.mainActivity, item);
+                ImageDownloader.saveToInternalStorage(this.mainActivity, item);
                 // Save items info in database
                 this.db.addItem(item);
                 // Save category if new
