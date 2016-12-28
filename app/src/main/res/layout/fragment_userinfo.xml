@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Name..."
+        android:textColorHint="#282828"
+        android:ems="10"
+        android:id="@+id/editTextName"
+        android:layout_marginStart="24dp"
+        android:textColor="#282828"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true" />
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/editTextEmail"
+        android:hint="Email..."
+        android:textColorHint="#282828"
+        android:textColor="#282828"
+        android:layout_below="@+id/editTextName"
+        android:layout_alignStart="@+id/editTextName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="User information"
+        android:id="@+id/textView2"
+        android:layout_marginTop="57dp"
+        android:textColor="#282828"
+        android:layout_below="@+id/textView3"
+        android:layout_alignStart="@+id/editTextName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Settings"
+        android:id="@+id/textView3"
+        android:layout_marginTop="28dp"
+        android:textColor="#282828"
+        android:padding="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Download Updates"
+        android:id="@+id/textView4"
+        android:textColor="#282828"
+        android:layout_alignTop="@+id/switchUpdate"
+        android:layout_alignStart="@+id/textView2" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/switchUpdate"
+        android:checked="true"
+        android:textColor="#282828"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="33dp" />
+
+
+</RelativeLayout>
