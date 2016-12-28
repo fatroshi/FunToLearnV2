@@ -46,9 +46,6 @@ public class MainActivity extends AppCompatActivity
         this.navigation.showStartView();
     }
 
-    public Controller getController() {
-        return controller;
-    }
 
     @Override
     public void onBackPressed() {
@@ -60,6 +57,12 @@ public class MainActivity extends AppCompatActivity
         }
 
         // Shutdown the speaker
+        Navigation.getSpeaker().onDestroy();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
         Navigation.getSpeaker().onDestroy();
     }
 

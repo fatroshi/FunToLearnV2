@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$USER_HOME$/Dropbox/AndroidStudioProjects/KTH/FunToLearnV2/FunToLearnV2.iml" filepath="$USER_HOME$/Dropbox/AndroidStudioProjects/KTH/FunToLearnV2/FunToLearnV2.iml" />
-      <module fileurl="file://$USER_HOME$/Dropbox/AndroidStudioProjects/KTH/FunToLearnV2/app/app.iml" filepath="$USER_HOME$/Dropbox/AndroidStudioProjects/KTH/FunToLearnV2/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FunToLearnV2.iml" filepath="$PROJECT_DIR$/FunToLearnV2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
